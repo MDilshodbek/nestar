@@ -1,0 +1,3 @@
+NestJS - efficient server-side app with NodeJS / TypeScript / OOP, AOP, FP, Reactive Programming
+
+GrphQL - 
