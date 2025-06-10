@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { MemberAuthType, MemberStatus, MemberType } from '../../enums/member.enum';
 import { ObjectId } from 'mongoose';
 
@@ -7,10 +7,10 @@ export class Member {
 	@Field(() => String)
 	_id: ObjectId;
 
-	@Field(() => String)
+	@Field(() => MemberType)
 	memberType: MemberType;
 
-	@Field(() => String)
+	@Field(() => MemberStatus)
 	memberStatus: MemberStatus;
 
 	@Field(() => MemberAuthType)
@@ -36,37 +36,37 @@ export class Member {
 	@Field(() => String, { nullable: true })
 	memberDesc?: string;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberProperties: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberArticles: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberFollowers: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberFollowing: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberPoints: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberLikes: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberViews: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberComments: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberRank: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberWarnings: number;
 
-	@Field(() => String)
+	@Field(() => Int)
 	memberBlocks: number;
 
 	@Field(() => Date, { nullable: true })
