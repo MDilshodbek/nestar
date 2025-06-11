@@ -1,3 +1,11 @@
 NestJS - efficient server-side app with NodeJS / TypeScript / OOP, AOP, FP, Reactive Programming
 
 GrphQL - 
+
+NESTJS GRAPGQL INGRIDIENTS:
+    reolver - create quary & Mutation
+    modules - adding dependencies
+    services - business logic
+    guards - authorization
+    pipes - validate & transform
+    interceptor - execute before/after
