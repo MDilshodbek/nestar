@@ -23,10 +23,25 @@
 
 // console.log(reverseInteger(123456789));
 
-console.log('Task - ZL');
+// console.log('Task - ZL');
 
-const stringToKebab = (input: string): string => {
-	return input.trim().toLowerCase().replace(/\s+/g, '-');
-};
+// const stringToKebab = (input: string): string => {
+// 	return input.trim().toLowerCase().replace(/\s+/g, '-');
+// };
 
-console.log(stringToKebab('I Love Kebab'));
+// console.log(stringToKebab('I Love Kebab'));
+
+console.log('TASK - ZN');
+
+function rotateArray(arr: number[], index: number): number[] {
+	if (index < 0 || index >= arr.length) {
+		throw new Error('Index is out of array bounds');
+	}
+
+	const before = arr.slice(0, index + 1);
+	const after = arr.slice(index + 1);
+
+	return [...after, ...before];
+}
+
+console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
