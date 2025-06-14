@@ -37,7 +37,7 @@ export class MemberResolver {
 
 	// Test
 	@UseGuards(AuthGuard)
-	@Mutation(() => String)
+	@Query(() => String)
 	public async checkAuth(@AuthMember('memberNick') memberNick: string): Promise<string> {
 		console.log('Query: checkAuth');
 		return `Hi ${memberNick}`;
@@ -46,7 +46,7 @@ export class MemberResolver {
 	// Test Roles
 	@Roles(MemberType.USER, MemberType.AGENT)
 	@UseGuards(RolesGuard)
-	@Mutation(() => String)
+	@Query(() => String)
 	public async checkAuthRoles(@AuthMember() authMember: Member): Promise<string> {
 		console.log('Query: checkAuth');
 		return `Hi ${authMember.memberNick}, you are ${authMember.memberType}, and your id is ${authMember._id}`;
