@@ -31,17 +31,41 @@
 
 // console.log(stringToKebab('I Love Kebab'));
 
-console.log('TASK - ZN');
+// console.log('TASK - ZN');
 
-function rotateArray(arr: number[], index: number): number[] {
-	if (index < 0 || index >= arr.length) {
-		throw new Error('Index is out of array bounds');
-	}
+// function rotateArray(arr: number[], index: number): number[] {
+// 	if (index < 0 || index >= arr.length) {
+// 		throw new Error('Index is out of array bounds');
+// 	}
 
-	const before = arr.slice(0, index + 1);
-	const after = arr.slice(index + 1);
+// 	const before = arr.slice(0, index + 1);
+// 	const after = arr.slice(index + 1);
 
-	return [...after, ...before];
+// 	return [...after, ...before];
+// }
+
+// console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
+
+console.log('Task - ZO');
+
+const areParenthesesBalanced = (input: string): boolean => {
+  let balance = 0;
+
+  for (const char of input) {
+    if (char === '(') {
+      balance++;
+    } else if (char === ')') {
+      balance--;
+      if (balance < 0) {
+        return false;
+      }
+    }
+  }
+
+  return balance === 0;
 }
 
-console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
+console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
+console.log(areParenthesesBalanced("no(balans(qavs)"));
+console.log(areParenthesesBalanced("extra)open()")); 
+
