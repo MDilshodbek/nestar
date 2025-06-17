@@ -43,7 +43,7 @@ export class MemberResolver {
 	@Query(() => String)
 	public async checkAuthRoles(@AuthMember() authMember: Member): Promise<string> {
 		console.log('Query: checkAuth');
-		return `Hi ${authMember.memberNick}, you are ${authMember.memberType}, and your id is ${authMember._id}`;
+		return `Hi ${authMember.memberFullName}, you are ${authMember.memberType}, your phone number is ${authMember.memberPhone} and your id is ${authMember._id}`;
 	}
 
 	@UseGuards(WithoutGuard)

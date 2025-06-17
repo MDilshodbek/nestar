@@ -77,6 +77,8 @@ export class MemberService {
 		};
 
 		const targetMember = await this.memberModel.findOne(search).lean().exec();
+		console.log('targetMember:', typeof targetMember);
+
 		if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		if (membeId) {
