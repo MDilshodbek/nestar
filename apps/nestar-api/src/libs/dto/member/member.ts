@@ -46,7 +46,7 @@ export class Member {
 	memberFollowers: number;
 
 	@Field(() => Int)
-	memberFollowings: number;
+	memberFollowings?: number;
 
 	@Field(() => Int)
 	memberPoints: number;
@@ -70,21 +70,21 @@ export class Member {
 	memberBlocks: number;
 
 	@Field(() => Date, { nullable: true })
-	deletedAt: Date;
+	deletedAt?: Date;
 
 	@Field(() => Date)
 	createdAt: Date;
 
-	@Field(() => Date, { nullable: true })
+	@Field(() => Date)
 	updatedAt: Date;
 
-	@Field(() => String, {nullable: true})
-	accessToken?: string; 
+	@Field(() => String, { nullable: true })
+	accessToken?: string;
 }
 
 @ObjectType()
 export class TotalCounter {
-	@Field(() => Int, {nullable: true})
+	@Field(() => Int, { nullable: true })
 	total: number;
 }
 
@@ -93,6 +93,6 @@ export class Members {
 	@Field(() => [Member])
 	list: Member[];
 
-	@Field(() => [TotalCounter], {nullable: true})
+	@Field(() => [TotalCounter], { nullable: true })
 	metaCounter: TotalCounter[];
 }

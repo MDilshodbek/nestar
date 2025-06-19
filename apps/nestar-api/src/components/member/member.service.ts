@@ -111,6 +111,7 @@ export class MemberService {
 				{ $match: match },
 				{ $sort: sort },
 				{
+					// birnechta query mantiqlarini tashkil etib alohida nom bilan ma'li,otlarni tartibli xolda olib beradi
 					$facet: {
 						list: [{ $skip: (input.page - 1) * input.limit }, { $limit: input.limit }],
 						metaCounter: [{ $count: 'total' }],
