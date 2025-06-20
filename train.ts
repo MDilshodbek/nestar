@@ -46,26 +46,51 @@
 
 // console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
 
-console.log('Task - ZO');
+// console.log('Task - ZO');
 
-const areParenthesesBalanced = (input: string): boolean => {
-  let balance = 0;
+// const areParenthesesBalanced = (input: string): boolean => {
+//   let balance = 0;
 
-  for (const char of input) {
-    if (char === '(') {
-      balance++;
-    } else if (char === ')') {
-      balance--;
-      if (balance < 0) {
-        return false;
-      }
-    }
-  }
+//   for (const char of input) {
+//     if (char === '(') {
+//       balance++;
+//     } else if (char === ')') {
+//       balance--;
+//       if (balance < 0) {
+//         return false;
+//       }
+//     }
+//   }
 
-  return balance === 0;
+//   return balance === 0;
+// }
+
+// console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
+// console.log(areParenthesesBalanced("no(balans(qavs)"));
+// console.log(areParenthesesBalanced("extra)open()"));
+
+console.log('Task - ZP');
+
+function areArraysEqual(a: number[], b: number[]): boolean {
+	const count = (arr: number[]) =>
+		arr.reduce((acc, val) => {
+			acc.set(val, (acc.get(val) || 0) + 1);
+			return acc;
+		}, new Map<number, number>());
+
+	const mapA = count(a);
+	const mapB = count(b);
+
+	if (mapA.size !== mapB.size) return false;
+
+	for (const [key, val] of mapA) {
+		if (mapB.get(key) !== val) return false;
+	}
+
+	return true;
 }
 
-console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));
-console.log(areParenthesesBalanced("no(balans(qavs)"));
-console.log(areParenthesesBalanced("extra)open()")); 
-
+console.log(areArraysEqual([1, 2, 3], [3, 1, 2]));
+console.log(areArraysEqual([1, 2, 3], [3, 1, 2, 1]));
+console.log(areArraysEqual([1, 2, 3], [4, 1, 2]));
+console.log(areArraysEqual([1, 2, 2], [2, 1, 2]));
