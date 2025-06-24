@@ -69,28 +69,49 @@
 // console.log(areParenthesesBalanced("no(balans(qavs)"));
 // console.log(areParenthesesBalanced("extra)open()"));
 
-console.log('Task - ZP');
+// console.log('Task - ZP');
 
-function areArraysEqual(a: number[], b: number[]): boolean {
-	const count = (arr: number[]) =>
-		arr.reduce((acc, val) => {
-			acc.set(val, (acc.get(val) || 0) + 1);
-			return acc;
-		}, new Map<number, number>());
+// function areArraysEqual(a: number[], b: number[]): boolean {
+// 	const count = (arr: number[]) =>
+// 		arr.reduce((acc, val) => {
+// 			acc.set(val, (acc.get(val) || 0) + 1);
+// 			return acc;
+// 		}, new Map<number, number>());
 
-	const mapA = count(a);
-	const mapB = count(b);
+// 	const mapA = count(a);
+// 	const mapB = count(b);
 
-	if (mapA.size !== mapB.size) return false;
+// 	if (mapA.size !== mapB.size) return false;
 
-	for (const [key, val] of mapA) {
-		if (mapB.get(key) !== val) return false;
+// 	for (const [key, val] of mapA) {
+// 		if (mapB.get(key) !== val) return false;
+// 	}
+
+// 	return true;
+// }
+
+// console.log(areArraysEqual([1, 2, 3], [3, 1, 2]));
+// console.log(areArraysEqual([1, 2, 3], [3, 1, 2, 1]));
+// console.log(areArraysEqual([1, 2, 3], [4, 1, 2]));
+// console.log(areArraysEqual([1, 2, 2], [2, 1, 2]));
+
+console.log('Task - ZQ');
+
+const findDuplicates = (arr: number[]): number[] => {
+	const countMap = new Map<number, number>();
+	const result: number[] = [];
+
+	for (const num of arr) {
+		countMap.set(num, (countMap.get(num) || 0) + 1);
 	}
 
-	return true;
-}
+	for (const [num, count] of countMap.entries()) {
+		if (count >= 2) {
+			result.push(num);
+		}
+	}
 
-console.log(areArraysEqual([1, 2, 3], [3, 1, 2]));
-console.log(areArraysEqual([1, 2, 3], [3, 1, 2, 1]));
-console.log(areArraysEqual([1, 2, 3], [4, 1, 2]));
-console.log(areArraysEqual([1, 2, 2], [2, 1, 2]));
+	return result;
+};
+
+console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]));
