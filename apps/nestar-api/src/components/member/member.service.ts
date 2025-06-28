@@ -11,13 +11,16 @@ import { StatisticModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
 import { ViewInput } from '../../libs/dto/view/view.input';
 import { ViewGroup } from '../../libs/enums/view.enum';
+import { Follower, Following, MeFollowed } from '../../libs/dto/follow/follow';
 
 @Injectable()
 export class MemberService {
 	constructor(
 		@InjectModel('Member') private readonly memberModel: Model<Member>,
+		@InjectModel('Follow') private readonly followModel: Model<Follower | Following>,
 		private authService: AuthService,
 		private viewService: ViewService,
+		// private likeService: LikeService,
 	) {}
 
 	public async signup(input: MemberInput): Promise<Member> {
@@ -68,7 +71,7 @@ export class MemberService {
 		return result;
 	}
 
-	public async getMember(membeId: ObjectId, targetId: ObjectId): Promise<Member> {
+	public async getMember(memberId: ObjectId, targetId: ObjectId): Promise<Member> {
 		const search: T = {
 			_id: targetId,
 			memberStatus: {
@@ -77,15 +80,13 @@ export class MemberService {
 		};
 
 		const targetMember = await this.memberModel.findOne(search).lean().exec();
-		console.log('targetMember:', typeof targetMember);
-
 		if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
-		if (membeId) {
+		if (memberId) {
 			// record view
-			const viewInput: ViewInput = { memberId: membeId, viewRefId: targetId, viewGroup: ViewGroup.MEMBER };
+			const viewInput: ViewInput = { memberId: memberId, viewRefId: targetId, viewGroup: ViewGroup.MEMBER };
 			const newView = await this.viewService.recordView(viewInput);
-
+			
 			// increase memberView
 			if (newView) {
 				await this.memberModel.findOneAndUpdate(search, { $inc: { memberViews: 1 } }, { new: true }).exec();
@@ -94,11 +95,18 @@ export class MemberService {
 
 			// meLiked
 			// meFollowed
+			targetMember.meFollowed = await this.checkSubscription(memberId, targetId);
 		}
 		return targetMember;
 	}
 
-	public async getAgents(membeId: ObjectId, input: AgentsInquiry): Promise<Members> {
+	private async checkSubscription(followerId: ObjectId, followingId: ObjectId): Promise<MeFollowed[]> {
+		const result = await this.followModel.findOne({ followingId: followingId, followerId: followerId }).exec();
+
+		return result ? [{ followerId: followerId, followingId: followingId, myFollowing: true }] : [];
+	}
+
+	public async getAgents(memberId: ObjectId, input: AgentsInquiry): Promise<Members> {
 		const { text } = input.search;
 		const match: T = { memberType: MemberType.AGENT, memberStatus: MemberStatus.ACTIVE };
 		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
