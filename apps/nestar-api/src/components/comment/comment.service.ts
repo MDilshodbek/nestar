@@ -101,4 +101,12 @@ export class CommentService {
 
 		return result[0];
 	}
+
+	// Admin
+	public async removeCommentByAdmin(commentId: ObjectId): Promise<Comment> {
+		const result = await this.commentModel.findByIdAndDelete(commentId);
+		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
+
+		return result;
+	}
 }
