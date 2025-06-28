@@ -5,10 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import MemberSchema from '../../schemas/Member.model';
 import { AuthModule } from '../auth/auth.module';
 import { ViewModule } from '../view/view.module';
-import { PropertyModule } from '../property/property.module';
 import { LikeModule } from '../like/like.module';
-import { CommentModule } from '../comment/comment.module';
-import { FollowModule } from '../follow/follow.module';
 import FollowSchema from '../../schemas/Follow.model';
 
 @Module({
