@@ -95,23 +95,42 @@
 // console.log(areArraysEqual([1, 2, 3], [4, 1, 2]));
 // console.log(areArraysEqual([1, 2, 2], [2, 1, 2]));
 
-console.log('Task - ZQ');
+// console.log('Task - ZQ');
 
-const findDuplicates = (arr: number[]): number[] => {
-	const countMap = new Map<number, number>();
-	const result: number[] = [];
+// const findDuplicates = (arr: number[]): number[] => {
+// 	const countMap = new Map<number, number>();
+// 	const result: number[] = [];
 
-	for (const num of arr) {
-		countMap.set(num, (countMap.get(num) || 0) + 1);
-	}
+// 	for (const num of arr) {
+// 		countMap.set(num, (countMap.get(num) || 0) + 1);
+// 	}
 
-	for (const [num, count] of countMap.entries()) {
-		if (count >= 2) {
-			result.push(num);
+// 	for (const [num, count] of countMap.entries()) {
+// 		if (count >= 2) {
+// 			result.push(num);
+// 		}
+// 	}
+
+// 	return result;
+// };
+
+// console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]));
+
+console.log('Task - ZR');
+
+const countNumberAndLetters = (input: string): { number: number; letter: number } => {
+	let number = 0;
+	let letter = 0;
+
+	for (const char of input) {
+		if (/[0-9]/.test(char)) {
+			number++;
+		} else if (/[a-zA-Z]/.test(char)) {
+			letter++;
 		}
 	}
 
-	return result;
+	return { number, letter };
 };
 
-console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]));
+console.log(countNumberAndLetters('string152%\\¥'));
