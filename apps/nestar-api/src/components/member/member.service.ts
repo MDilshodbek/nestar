@@ -15,6 +15,7 @@ import { Follower, Following, MeFollowed } from '../../libs/dto/follow/follow';
 import { LikeGroup } from '../../libs/enums/like.enum';
 import { LikeInput } from '../../libs/dto/like/like.input';
 import { LikeService } from '../like/like.service';
+import { lookupAuthMemberLiked } from '../../libs/config';
 
 @Injectable()
 export class MemberService {
@@ -127,7 +128,11 @@ export class MemberService {
 				{
 					// birnechta query mantiqlarini tashkil etib alohida nom bilan ma'lumotlarni tartibli xolda olib beradi
 					$facet: {
-						list: [{ $skip: (input.page - 1) * input.limit }, { $limit: input.limit }],
+						list: [
+							{ $skip: (input.page - 1) * input.limit },
+							{ $limit: input.limit },
+							lookupAuthMemberLiked(memberId, '$_id'),
+						],
 						metaCounter: [{ $count: 'total' }],
 					},
 				},
