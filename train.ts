@@ -135,20 +135,48 @@
 
 // console.log(countNumberAndLetters('string152%\\¥'));
 
-console.log('Task - ZS');
+// console.log('Task - ZS');
 
-const singleNumber = (arr: number[]): number | null => {
-	const map = new Map<number, number>();
+// const singleNumber = (arr: number[]): number | null => {
+// 	const map = new Map<number, number>();
 
-	for (const num of arr) {
-		map.set(num, (map.get(num) ?? 0) + 1);
+// 	for (const num of arr) {
+// 		map.set(num, (map.get(num) ?? 0) + 1);
+// 	}
+
+// 	for (const [key, value] of map.entries()) {
+// 		if (value === 1) return key;
+// 	}
+
+// 	return null;
+// };
+
+// console.log(singleNumber([4, 2, 1, 2, 1]));
+
+console.log('Task - ZT');
+
+function firstUniqueCharIndex(str: string): number {
+	const map = new Map<string, number>();
+
+	// 1-bosqich: harflarni va indekslarini eslab qolish
+	for (let i = 0; i < str.length; i++) {
+		if (map.has(str[i])) {
+			map.set(str[i], -1); // Takrorlangan belgilar uchun -1 saqlaymiz
+		} else {
+			map.set(str[i], i);
+		}
 	}
 
-	for (const [key, value] of map.entries()) {
-		if (value === 1) return key;
+	// 2-bosqich: birinchi takrorlanmagan belgining indeksini topamiz
+	for (const [char, index] of map.entries()) {
+		if (index !== -1) {
+			return index;
+		}
 	}
 
-	return null;
-};
+	return -1;
+}
 
-console.log(singleNumber([4, 2, 1, 2, 1]));
+console.log(firstUniqueCharIndex('success')); 
+console.log(firstUniqueCharIndex('stamp'));
+console.log(firstUniqueCharIndex('level')); 
