@@ -168,7 +168,7 @@ export class BoardArticleService {
 		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
 		if (articleStatus) match.articleStatus = articleStatus;
-		if (articleCategory) match.articleCategory = { $in: articleCategory };
+		if (articleCategory) match.articleCategory = articleCategory;
 
 		const result = await this.boardArticleModel
 			.aggregate([
