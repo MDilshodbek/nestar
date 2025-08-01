@@ -39,7 +39,6 @@ export class SocketGateway implements OnGatewayInit {
 		try {
 			const parseUrl = url.parse(req.url, true);
 			const { token } = parseUrl.query;
-			console.log('token', token);
 			return await this.authService.verifyToken(token as string);
 		} catch (error) {
 			return null;
@@ -73,7 +72,7 @@ export class SocketGateway implements OnGatewayInit {
 		this.clientsAuthMap.delete(client);
 
 		const clientNick: String = authMember?.memberNick ?? 'Guest';
-		this.logger.verbose(`Disconnection & total: [${this.summaryClient}]`);
+		this.logger.verbose(`Disconnection [${clientNick}] & total: [${this.summaryClient}]`);
 
 		const infoMsg: InfoPayload = {
 			event: 'Info',
